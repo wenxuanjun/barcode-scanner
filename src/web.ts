@@ -187,7 +187,7 @@ export class BarcodeScannerWeb extends WebPlugin implements BarcodeScannerPlugin
 
   private async _startVideo(): Promise<{}> {
     return new Promise(async (resolve, reject) => {
-      await navigator.mediaDevices
+      const permission = await navigator.mediaDevices
         .getUserMedia({
           audio: false,
           video: true,
@@ -195,10 +195,17 @@ export class BarcodeScannerWeb extends WebPlugin implements BarcodeScannerPlugin
         .then((stream: MediaStream) => {
           // Stop any existing stream so we can request media with different constraints based on user input
           stream.getTracks().forEach((track) => track.stop());
+          return true;
         })
         .catch((error) => {
           reject(error);
+          return false;
         });
+
+      // If the user didn't grant permission to use their camera, exit immediately
+      if (!permission) {
+      	return;
+      }
 
       const body = document.body;
       const video = document.getElementById('video');
