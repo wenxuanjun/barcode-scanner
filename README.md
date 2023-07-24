@@ -2,6 +2,8 @@
 
 The `BarcodeScanner.startScan()` will now stop immediately if permission is not granted on web, so you can catch the error naturally.
 
+Click `Only this time` on Android 11 and above fixed by reset the `neverAsked` to true.
+
 ## Original README
 
 <p align="center"><br><img src="https://user-images.githubusercontent.com/236501/85893648-1c92e880-b7a8-11ea-926d-95355b8175c7.png" width="128" height="128" /></p>

@@ -483,6 +483,9 @@ public class BarcodeScanner extends Plugin implements BarcodeCallback {
             // permission GRANTED
             Log.d(TAG_PERMISSION, "Asked. Granted");
             this.savedReturnObject.put(GRANTED, true);
+
+            // Fix for one-time permission access
+            setPermissionFirstTimeAsking(PERMISSION_NAME, true);
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (getActivity().shouldShowRequestPermissionRationale(PERMISSION_NAME)) {
